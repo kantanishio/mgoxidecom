@@ -66,6 +66,95 @@
 </div>
 
 
+
+
+
+
+
+
+
+
+
+
+<div class="bg-white py-6 sm:py-8 lg:py-12">
+  <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
+    <!-- text - start -->
+    <div class="mb-10 md:mb-16">
+      <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6">Frequently asked questions</h2>
+
+      <p class="max-w-screen-md text-gray-500 md:text-lg text-center mx-auto">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is random or otherwise generated.</p>
+    </div>
+    <!-- text - end -->
+
+    <div class="flex flex-col max-w-screen-sm border-t mx-auto">
+      <!-- question - start -->
+      <div class="border-b">
+        <div class="flex justify-between text-black hover:text-indigo-500 active:text-indigo-600 cursor-pointer gap-2 py-4">
+          <span class="md:text-lg font-semibold transition duration-100">How does the product work?</span>
+
+          <span class="text-indigo-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </span>
+        </div>
+
+        <p class="hidden text-gray-500 mb-4">本体を取り出し、電源を入れ、撮像素子センサーのキャップを外し、太陽に向けて3時間ほど置いておくと、はたして壊れるかどうか、挑戦してみましょう。</p>
+      </div>
+      <!-- question - end -->
+
+      <!-- question - start -->
+      <div class="border-b">
+        <div class="flex justify-between text-black hover:text-indigo-500 active:text-indigo-600 cursor-pointer gap-2 py-4">
+          <span class="md:text-lg font-semibold transition duration-100">What are the features?</span>
+
+          <span class="text-indigo-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </span>
+        </div>
+
+        <p class="hidden text-gray-500 mb-4">宇宙からのたくましいハンドルさばきのきのこが一緒に、切ないですよ。</p>
+      </div>
+      <!-- question - end -->
+
+      <!-- question - start -->
+      <div class="border-b">
+        <div class="flex justify-between text-black hover:text-indigo-500 active:text-indigo-600 cursor-pointer gap-2 py-4">
+          <span class="md:text-lg font-semibold transition duration-100">What about integrations?</span>
+
+          <span class="text-indigo-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </span>
+        </div>
+
+        <p class="hidden text-gray-500 mb-4">ロジスティクスも、エドテックも、お任せください。</p>
+      </div>
+      <!-- question - end -->
+
+      <!-- question - start -->
+      <div class="border-b">
+        <div class="flex justify-between text-black hover:text-indigo-500 active:text-indigo-600 cursor-pointer gap-2 py-4">
+          <span class="md:text-lg font-semibold transition duration-100">Is support available?</span>
+
+          <span class="text-indigo-500 rotate-180">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </span>
+        </div>
+
+        <p class="text-gray-500 mb-4">No.</p>
+      </div>
+      <!-- question - end -->
+    </div>
+  </div>
+</div>
+
+
 </div>
 </template>
   
