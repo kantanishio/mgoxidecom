@@ -1,5 +1,7 @@
 <template>
   <div>
-    <NuxtWelcome /> 
+    <div class="font-bold text-pink-500">
+      あああ
+    </div>
   </div>
 </template>
