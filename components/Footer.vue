@@ -2,12 +2,9 @@
 
     <div>
 
-        <footer class="mt-auto w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
+        <footer class="mt-auto w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto bg-gradient-to-r from-[#AAC5FF] to-[#F7931E]">
   <!-- Grid -->
-  <div class="text-center">
-    <div>
-      <a class="flex-none text-xl font-semibold text-black" href="#" aria-label="Brand">MgO</a>
-    </div>
+  <div class="text-center ">
     <!-- End Col -->
 
     <div class="mt-3">
