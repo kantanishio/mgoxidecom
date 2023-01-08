@@ -6,7 +6,7 @@
   <!-- Grid -->
   <div class="text-center">
     <div>
-      <a class="flex-none text-xl font-semibold text-black" href="#" aria-label="Brand">MGO</a>
+      <a class="flex-none text-xl font-semibold text-black" href="#" aria-label="Brand">MgO</a>
     </div>
     <!-- End Col -->
 
