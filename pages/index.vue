@@ -4,20 +4,16 @@
 
 
 
-<div class="bg-[url('@/static/bg/b2.svg')] bg-cover py-6 sm:py-8 lg:py-12">
-  <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
+<div class="bg-[url('@/static/bg/b2.svg')] h-80 lg:h-96 bg-cover py-6 sm:py-8 lg:py-12">
+  <div class="max-w-screen-2xl  px-4 md:px-8 mx-auto">
     <!-- text - start -->
     <div class="mb-10 md:mb-16">
 
       <p class="max-w-screen-md text-gray-500 md:text-lg text-center mx-auto">
-        ぽつ <br><br><br>
-        ぽつ <br><br><br>
-        ザー！！！！！ <br><br><br>
-        
+
       </p>
 
       <h2 class="text-gray-800 text-xs font-bold text-right mb-4 md:mb-6">
-        今月の3行ポエム
       </h2>
 
     </div>
