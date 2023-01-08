@@ -2,7 +2,7 @@
 
     <div>
 
-        <footer class="mt-auto w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto bg-gradient-to-r from-[#AAC5FF] to-[#F7931E]">
+        <footer class="mt-auto w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto bg-white">
   <!-- Grid -->
   <div class="text-center ">
     <!-- End Col -->

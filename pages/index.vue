@@ -4,7 +4,7 @@
 
 
 
-<div class="bg-black py-6 sm:py-8 lg:py-12">
+<div class="bg-[url('@/static/bg/b2.svg')] bg-cover py-6 sm:py-8 lg:py-12">
   <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
     <!-- text - start -->
     <div class="mb-10 md:mb-16">

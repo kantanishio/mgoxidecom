@@ -7,5 +7,10 @@ module.exports = {
       './plugins/**/*.{js,ts}',
       './nuxt.config.{js,ts}',
     ],
+
+    backgroundImage: {
+      'lightbulb': "url('/static/bg/bg2.svg')",
+    }
+
   };
   
