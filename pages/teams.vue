@@ -31,7 +31,7 @@
         <div class="flex justify-between items-end gap-4 mb-6">
           <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold">
             What
-            We<img src="@/static/logo/logo_bl2.svg" alt="">
+            We<img src="/logo/logo_bl2.svg" alt="">
             do
           </h2>
     
@@ -42,7 +42,7 @@
           <!-- product - start -->
           <div>
             <a href="#" class="group h-96 block bg-gray-100 rounded-lg overflow-hidden shadow-lg mb-2 lg:mb-3">
-              <img src="@/static/collection/1.jpg" loading="lazy" alt="Photo by Austin Wade" class="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200" />
+              <img src="/collection/1.jpg" loading="lazy" alt="Photo by Austin Wade" class="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200" />
             </a>
     
             <div class="flex flex-col">
@@ -55,7 +55,7 @@
           <!-- product - start -->
           <div>
             <a href="#" class="group h-96 block bg-gray-100 rounded-lg overflow-hidden shadow-lg mb-2 lg:mb-3">
-              <img src="@/static/collection/2.jpg" loading="lazy" alt="Photo by engin akyurt" class="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200" />
+              <img src="/collection/2.jpg" loading="lazy" alt="Photo by engin akyurt" class="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200" />
             </a>
     
             <div class="flex flex-col">
@@ -68,7 +68,7 @@
           <!-- product - start -->
           <div>
             <a href="#" class="group h-96 block bg-gray-100 rounded-lg overflow-hidden shadow-lg mb-2 lg:mb-3">
-              <img src="@/static/collection/3.jpg" loading="lazy" alt="Photo by Austin Wade" class="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200" />
+              <img src="/collection/3.jpg" loading="lazy" alt="Photo by Austin Wade" class="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200" />
             </a>
     
             <div class="flex flex-col">
@@ -81,7 +81,7 @@
           <!-- product - start -->
           <div>
             <a href="#" class="group h-96 block bg-gray-100 rounded-lg overflow-hidden shadow-lg mb-2 lg:mb-3">
-              <img src="@/static/collection/4.png" loading="lazy" alt="Photo by Austin Wade" class="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200" />
+              <img src="/collection/4.png" loading="lazy" alt="Photo by Austin Wade" class="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200" />
             </a>
     
             <div class="flex flex-col">
