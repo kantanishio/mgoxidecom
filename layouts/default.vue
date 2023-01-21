@@ -1,4 +1,6 @@
 <template>
+
+  <div>
     <div>
       <nav>
         <Navigation />
@@ -10,5 +12,5 @@
     <div>
         <Footer />
     </div>
-  </template>
-  
+  </div>
+</template>

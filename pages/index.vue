@@ -4,25 +4,6 @@
 
 
 
-<div class=" py-6 sm:py-8 lg:py-12">
-  <div class="max-w-screen-2xl h-64 px-4 md:px-8 mx-auto">
-    <!-- text - start -->
-    <div class="mb-10 md:mb-16">
-
-      <p class="max-w-screen-md text-gray-500 md:text-lg text-center mx-auto">
-
-      </p>
-
-      <h2 class="text-gray-800 text-xs font-bold text-right mb-4 md:mb-6">
-      </h2>
-
-    </div>
-    <!-- text - end -->
-
-  </div>
-</div>
-
-
 
 <div class="text-pink-500">
 
