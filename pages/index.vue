@@ -23,11 +23,11 @@
       <!-- product - start -->
       <div>
         <a href="#" class="group h-96 block bg-gray-100 rounded-lg overflow-hidden shadow-lg mb-2 lg:mb-3">
-          <img src="/collection/1.jpg" loading="lazy" alt="Photo by Austin Wade" class="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200" />
+          <img src="/collection/xxxx.jpg" loading="lazy" alt="Photo by Austin Wade" class="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200" />
         </a>
 
         <div class="flex flex-col">
-          <span class="text-gray-500">everything is show biz!</span>
+          <span class="text-gray-500"></span>
           <a href="#" class="text-gray-800 hover:text-gray-500 text-lg lg:text-xl font-bold transition duration-100">テレビ番組制作</a>
         </div>
       </div>
@@ -36,11 +36,11 @@
       <!-- product - start -->
       <div>
         <a href="#" class="group h-96 block bg-gray-100 rounded-lg overflow-hidden shadow-lg mb-2 lg:mb-3">
-          <img src="/collection/2.jpg" loading="lazy" alt="Photo by engin akyurt" class="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200" />
+          <img src="/collection/xxxx.jpg" loading="lazy" alt="Photo by engin akyurt" class="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200" />
         </a>
 
         <div class="flex flex-col">
-          <span class="text-gray-500">on-air everywhere</span>
+          <span class="text-gray-500"></span>
           <a href="#" class="text-gray-800 hover:text-gray-500 text-lg lg:text-xl font-bold transition duration-100">映像配信</a>
         </div>
       </div>
@@ -49,7 +49,7 @@
       <!-- product - start -->
       <div>
         <a href="#" class="group h-96 block bg-gray-100 rounded-lg overflow-hidden shadow-lg mb-2 lg:mb-3">
-          <img src="/collection/3.jpg" loading="lazy" alt="Photo by Austin Wade" class="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200" />
+          <img src="/collection/xxxx.jpg" loading="lazy" alt="Photo by Austin Wade" class="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200" />
         </a>
 
         <div class="flex flex-col">
@@ -62,11 +62,11 @@
       <!-- product - start -->
       <div>
         <a href="#" class="group h-96 block bg-gray-100 rounded-lg overflow-hidden shadow-lg mb-2 lg:mb-3">
-          <img src="/collection/4.png" loading="lazy" alt="Photo by Austin Wade" class="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200" />
+          <img src="/collection/xxxx.png" loading="lazy" alt="Photo by Austin Wade" class="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200" />
         </a>
 
         <div class="flex flex-col">
-          <span class="text-gray-500">and more!</span>
+          <span class="text-gray-500"></span>
           <a href="#" class="text-gray-800 hover:text-gray-500 text-lg lg:text-xl font-bold transition duration-100">...AND MORE!</a>
         </div>
       </div>
