@@ -62,7 +62,7 @@
       <!-- product - start -->
       <div>
         <a href="#" class="group h-96 block bg-gray-100 rounded-lg overflow-hidden shadow-lg mb-2 lg:mb-3">
-          <img src="/collection/xxxx.png" loading="lazy" alt="Photo by Austin Wade" class="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200" />
+          <img src="/collection/xxxx.jpg" loading="lazy" alt="Photo by Austin Wade" class="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200" />
         </a>
 
         <div class="flex flex-col">
