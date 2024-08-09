@@ -10,7 +10,7 @@
     <div>
         <slot />
     </div>
-    <div>
+    <div class="fixed bottom-0">
         <Footer />
     </div>
   </div>
