@@ -3,7 +3,7 @@
 
 <div class="container-sm ml-10 mt-10 text-gray-500">
 
-<p class="text-xl text-gray-500">
+<p class="text-l text-gray-500">
     Knata Nishio
 <br>
     TV, radio, video, websites, etc... 
