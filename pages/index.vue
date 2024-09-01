@@ -6,7 +6,7 @@
 <p class="text-xl text-gray-500">
     Knata Nishio
 <br>
-    TV, Radio, Video, Website, Etc... 
+    TV, radio, video, websites, etc... 
 <br>
     080 3093 8738
 <br>
