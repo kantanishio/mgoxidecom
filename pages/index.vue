@@ -5,10 +5,13 @@
 
 <p class="text-xl text-gray-500">
     Knata Nishio
-<br><br>
-080 3093 8738
 <br>
-kantanishio@mg-oxide.com
+    TV, Radio, Video, Website, Etc... 
+<br>
+    080 3093 8738
+<br>
+    kantanishio@mg-oxide.com
+
 </p>
 
 
