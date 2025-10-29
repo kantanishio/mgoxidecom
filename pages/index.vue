@@ -24,12 +24,30 @@
     <br>
     <br>
     <br>
-    
+
     <br>
-    2   0    2    5, P       E       T, 0904 0918 1002 1016 1106 1120 F　  U    N, 0911 0925 1019 1023 1113 1127 1211 1225
 
 
 </p>
+
+<p class="text-l text-gray-500 leading-relaxed">
+   
+   MEMO
+   <br>
+   2   0    2    5, P       E       T, 0904 0918 1002 1016 1106 1120 F　  U    N, 0911 0925 1019 1023 1113 1127 1211 1225
+
+
+</p>
+
+
+<p class="text-l text-gray-500 leading-relaxed">
+   
+    KANSTAGRAM
+    <br>
+    coming soon
+
+</p>
+
 
 </div>
 
