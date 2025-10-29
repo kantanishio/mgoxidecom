@@ -30,9 +30,9 @@
 
 <p class="text-l text-gray-500 leading-relaxed">
    
-   MEMO
+   CODE
    <br>
-   2   0    2    5, P       E       T, 0904 0918 1002 1016 1106 1120 F　  U    N, 0911 0925 1019 1023 1113 1127 1211 1225
+   2025, PET, 0904 0918 1002 1016 1106 1120 FUN, 0911 0925 1019 1023 1113 1127 1211 1225
    <br>
    <br>
    <br>
@@ -43,12 +43,24 @@
 
 <p class="text-l text-gray-500 leading-relaxed">
    
-    KANSTAGRAM
+    WORK
     <br>
-    coming soon
+    <a href="https://www.web.nhk/tv/an/eigodeasobo/pl/series-tep-WQZGW8RVPL">eigo de asobo</a>
+    <a href="https://www.web.nhk/tv/an/eigodeasobo/pl/series-tep-WQZGW8RVPL"></a>
     <br>
     <br>
     <br>
+
+</p>
+
+<p class="text-l text-gray-500 leading-relaxed">
+   
+   KANSTAGRAM
+   <br>
+   coming soon
+   <br>
+   <br>
+   <br>
 
 </p>
 
