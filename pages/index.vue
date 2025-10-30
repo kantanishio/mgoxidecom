@@ -69,4 +69,45 @@
 
 </div>
 
+<div class="fixed bottom-4 right-4 text-gray-600 text-sm bg-white/70 rounded px-3 py-1 pointer-events-none select-none">
+  {{ product }}
+ </div>
+
 </template>
+
+<script setup>
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+
+const x = ref(0)
+const y = ref(0)
+const product = computed(() => x.value * y.value)
+
+function handlePointerLike(p) {
+  if (!p) return
+  x.value = Math.round(p.clientX || 0)
+  y.value = Math.round(p.clientY || 0)
+}
+
+function onPointer(e) {
+  handlePointerLike(e)
+}
+
+function onTouch(e) {
+  const t = e.touches && e.touches[0]
+  handlePointerLike(t)
+}
+
+onMounted(() => {
+  window.addEventListener('pointermove', onPointer, { passive: true })
+  window.addEventListener('pointerdown', onPointer, { passive: true })
+  window.addEventListener('touchstart', onTouch, { passive: true })
+  window.addEventListener('touchmove', onTouch, { passive: true })
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('pointermove', onPointer)
+  window.removeEventListener('pointerdown', onPointer)
+  window.removeEventListener('touchstart', onTouch)
+  window.removeEventListener('touchmove', onTouch)
+})
+</script>
