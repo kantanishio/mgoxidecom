@@ -16,7 +16,7 @@
 
      -->
 
-    <!-- Social Brands -->
+    <!-- Social Brands
     <div class="mt-10 ml-10 space-x-2">
       <a class="inline-flex justify-center items-center w-10 h-10 text-center text-gray-500 hover:bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition dark:text-gray-500 dark:hover:text-gray-200 dark:hover:bg-gray-800" href="#">
         <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
@@ -39,7 +39,7 @@
         </svg>
       </a>
     </div>
-    <!-- End Social Brands -->
+    End Social Brands -->
   </div>
   <!-- End Grid -->
 </footer>
