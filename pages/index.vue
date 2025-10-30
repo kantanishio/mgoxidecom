@@ -1,7 +1,7 @@
 <template>
 
 
-<div class="container-sm ml-10 mt-10 text-gray-500 relative">
+<div class="container-sm ml-10 mt-10 text-gray-500 relative pl-28">
 
 <img src="/collection/me_small.jpg" alt="Profile photo" class="absolute top-0 left-0 w-24 h-24 rounded-full object-cover" />
 
