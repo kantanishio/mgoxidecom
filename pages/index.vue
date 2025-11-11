@@ -9,13 +9,9 @@
     CONTACT
     <br>
     <br>
-    <br>
-    <br>
     Kanta Nishio
     <br>
-    <br>
     080 3093 8738
-    <br>
     <br>
     kantanishio@mg-oxide.com
     <br>
