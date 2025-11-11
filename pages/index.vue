@@ -9,10 +9,9 @@
     CONTACT
     <br>
     <br>
+    <br>
+    <br>
     Kanta Nishio
-    <br>
-    <br>
-    TV, radio, video, website... 
     <br>
     <br>
     080 3093 8738
@@ -32,7 +31,7 @@
 
 <p class="text-l text-gray-500 leading-relaxed">
    
-   CODE
+   生活
    <br>
    2025, PET, 0904 0918 1002 1016 1106 1120 FUN, 0911 0925 1019 1023 1113 1127 1211 1225
    <br>
@@ -47,10 +46,10 @@
    
     WORK
     <br>
+    Video, TV, etc.
+    <br>
     <a href="https://www.web.nhk/tv/an/eigodeasobo/pl/series-tep-WQZGW8RVPL">eigo de asobo</a>
     <a href="https://www.web.nhk/tv/an/eigodeasobo/pl/series-tep-WQZGW8RVPL"></a>
-    <br>
-    <br>
     <br>
 
 </p>
@@ -59,7 +58,7 @@
    
    KANSTAGRAM
    <br>
-   coming soon
+   coming soon...
    <br>
    <br>
    <br>
