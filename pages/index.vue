@@ -63,6 +63,28 @@
 
 </p>
 
+<p class="text-l text-gray-500 leading-relaxed">
+   KAN TOOLS
+   <br>
+   <NuxtLink to="/kan-tools" class="underline hover:text-gray-700">kan-tools（CLI 一覧・使い方）</NuxtLink>
+   <br>
+   <br>
+   <br>
+</p>
+
+<div class="mt-8">
+  <iframe 
+    width="560" 
+    height="315" 
+    src="https://www.youtube.com/embed/uSvwTqU6Sug" 
+    title="YouTube video player" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    allowfullscreen
+    class="rounded-lg"
+  ></iframe>
+</div>
+
 
 </div>
 
