@@ -117,7 +117,7 @@
 <body>
   <main class="wrap">
     <h1>おはなしの時間</h1>
-    <p class="lead">地層を押すと、青空文庫からひとつお話を選んで読み上げます。</p>
+    <p class="lead">おはなしを読んであげるから地層から本をひろってきなさい</p>
     <p class="hint">上の層ほど新しめ、下の層ほど古め。クリック位置の <code>(x,y)</code> で年代帯を調整します。</p>
 
     <div id="strata" class="strata" aria-label="地層アスキーアート">
@@ -209,6 +209,7 @@
               author: b["姓名"] || "作者不明",
               year: year,
               htmlUrl: b["XHTML/HTMLファイルURL"] || "",
+              cardUrl: b["図書カードURL"] || "",
               opening: b["書き出し"] || ""
             };
           })
@@ -226,19 +227,45 @@
       return catalogCache;
     }
 
-    function pickByDepth(books, depth) {
+    function depthToYearBand(depth) {
+      const p = depth * 100;
+      if (p < 10) return { min: -500, max: 0, label: "紀元前〜0年" };
+      if (p < 20) return { min: 1, max: 1000, label: "1〜1000年" };
+      if (p < 30) return { min: 1001, max: 1300, label: "1001〜1300年" };
+      if (p < 40) return { min: 1301, max: 1600, label: "1301〜1600年" };
+      if (p < 50) return { min: 1601, max: 1900, label: "1601〜1900年" };
+      if (p < 60) return { min: 1901, max: 1915, label: "1901〜1915年" };
+      if (p < 70) return { min: 1916, max: 1930, label: "1916〜1930年" };
+      if (p < 80) return { min: 1931, max: 1945, label: "1931〜1945年" };
+      if (p < 90) return { min: 1946, max: 1960, label: "1946〜1960年" };
+      return { min: 1961, max: 2025, label: "1961年〜" };
+    }
+
+    function pickByDepth(books, depth, xRatio) {
       const withYear = books.filter((b) => Number.isFinite(b.year));
       const pool = withYear.length ? withYear : books.map((b) => ({ ...b, year: 1900 }));
-      const sorted = [...pool].sort((a, b) => a.year - b.year);
+      const band = depthToYearBand(depth);
 
-      // 分布の偏り補正: 座標を「年」ではなく分位点にマップ
-      const q = 1 - Math.pow(depth, 1.75); // top -> newer, bottom -> older
-      const center = Math.max(0, Math.min(sorted.length - 1, Math.round(q * (sorted.length - 1))));
-      const span = Math.max(6, Math.floor(sorted.length * 0.12));
-      const lo = Math.max(0, center - span);
-      const hi = Math.min(sorted.length - 1, center + span);
-      const window = sorted.slice(lo, hi + 1);
-      return window[Math.floor(Math.random() * window.length)];
+      let candidates = pool.filter((b) => b.year >= band.min && b.year <= band.max);
+
+      // 該当年代が少ない場合は段階的にレンジ拡張
+      let expand = 25;
+      while (candidates.length < 6 && expand <= 600) {
+        candidates = pool.filter((b) => b.year >= (band.min - expand) && b.year <= (band.max + expand));
+        expand += 50;
+      }
+      if (!candidates.length) candidates = pool;
+
+      candidates.sort((a, b) => a.year - b.year);
+
+      // 同じ層の中では x 座標でさらに年代を散らす（左=古い寄り、右=新しい寄り）
+      const idxCenter = Math.floor((candidates.length - 1) * xRatio);
+      const span = Math.max(2, Math.floor(candidates.length * 0.18));
+      const lo = Math.max(0, idxCenter - span);
+      const hi = Math.min(candidates.length - 1, idxCenter + span);
+      const window = candidates.slice(lo, hi + 1);
+      const picked = window[Math.floor(Math.random() * window.length)];
+      return { picked, band };
     }
 
     async function fetchReadableText(book) {
@@ -257,9 +284,12 @@
           .replace(/^Markdown Content:/m, "")
           .replace(/\n{3,}/g, "\n\n")
           .trim();
-        return body || book.opening || "本文を取得できませんでした。";
+        if (body && body.length > 120) return body;
+        if (book.opening && book.opening.length > 15) return book.opening;
+        return `「${book.title}」の本文取得に失敗しました。図書カードでご確認ください。`;
       } catch {
-        return book.opening || "本文取得に失敗しました。";
+        if (book.opening && book.opening.length > 15) return book.opening;
+        return `「${book.title}」の本文取得に失敗しました。図書カードでご確認ください。`;
       }
     }
 
@@ -298,21 +328,22 @@
       const x = Math.max(0, Math.min(rect.width, clientX - rect.left));
       const y = Math.max(0, Math.min(rect.height, clientY - rect.top));
       const depth = y / rect.height;
+      const xRatio = x / rect.width;
 
       metaEl.textContent = `座標: x=${Math.round(x)}, y=${Math.round(y)} / depth=${depth.toFixed(2)} 読み込み中...`;
 
       const { books, source } = await getCatalog();
-      const picked = pickByDepth(books, depth);
+      const { picked, band } = pickByDepth(books, depth, xRatio);
       const text = await fetchReadableText(picked);
 
       currentWork = picked;
       currentText = text;
       titleEl.textContent = `${picked.title} — ${picked.author}`;
       excerptEl.textContent = text.slice(0, 4000);
-      metaEl.textContent = `推定年代: ${picked.year || "不明"}年ごろ / depth=${depth.toFixed(2)} / (${Math.round(x)}, ${Math.round(y)})`;
+      metaEl.textContent = `層の年代帯: ${band.label} / 選択作品: ${picked.year || "不明"}年ごろ / depth=${depth.toFixed(2)} / (${Math.round(x)}, ${Math.round(y)})`;
       sourceInfoEl.innerHTML =
         source === "zorapi"
-          ? `作品データ: ZORAPI。本文取得: <a href="https://r.jina.ai/" target="_blank" rel="noreferrer">r.jina.ai</a> 経由。`
+          ? `作品データ: ZORAPI。本文取得: <a href="https://r.jina.ai/" target="_blank" rel="noreferrer">r.jina.ai</a> 経由。${picked.cardUrl ? ` <a href="${picked.cardUrl}" target="_blank" rel="noreferrer">図書カード</a>` : ""}`
           : "作品データ: フォールバック内蔵リスト（API障害時モード）。";
 
       readBtn.disabled = false;
