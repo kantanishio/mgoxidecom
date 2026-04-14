@@ -6,8 +6,7 @@
 
     <h1 class="text-2xl font-semibold text-gray-700 mb-2">kan-tools</h1>
     <p class="text-l leading-relaxed mb-10">
-      個人用の CLI ツール置き場。ターミナルに戻ったときのメモ代わり。
-      ソースは主にローカル（Dropbox 側）で管理し、このページは一覧と使い方だけ。
+      個人用の CLI ツールメモ。ただ使い方が書いてあるだけ。
     </p>
 
     <section class="mb-12 border-b border-gray-200 pb-10">
@@ -36,7 +35,7 @@
     </section>
 
     <section>
-      <h2 class="text-lg font-medium text-gray-700 mb-3">インストール（ざっくり）</h2>
+      <h2 class="text-lg font-medium text-gray-700 mb-3">インストール</h2>
       <p class="text-sm leading-relaxed">
         各ツールの <code class="bg-gray-100 px-1 rounded">install_*.sh</code> を Transcription フォルダで実行し、
         <code class="bg-gray-100 px-1 rounded">PATH</code> に <code class="bg-gray-100 px-1 rounded">$HOME/.local/bin</code> を通す。
