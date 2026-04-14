@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>おはなしの時間</title>
+  <style>
+    :root {
+      --fg: #4b5563;
+      --fg-strong: #374151;
+      --line: #d1d5db;
+      --bg: #f9fafb;
+      --card: #ffffff;
+      --accent: #6b7280;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+    .wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 24px 16px 56px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.6rem, 3.5vw, 2.1rem);
+      color: var(--fg-strong);
+      letter-spacing: 0.02em;
+    }
+    .lead {
+      margin: 0 0 14px;
+      font-size: 0.95rem;
+    }
+    .hint {
+      margin: 0 0 14px;
+      font-size: 0.82rem;
+      color: #6b7280;
+    }
+    .strata {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--card);
+      cursor: pointer;
+      user-select: none;
+      padding: 12px;
+      margin: 0 0 14px;
+      overflow: auto;
+      height: min(62vh, 460px);
+      min-height: 300px;
+    }
+    .strata pre {
+      margin: 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", monospace;
+      font-size: clamp(9px, 1.9vw, 13px);
+      line-height: 1.08;
+      color: #4b5563;
+      white-space: pre;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--card);
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+    .meta {
+      margin: 0 0 6px;
+      font-size: 0.84rem;
+      color: #6b7280;
+    }
+    .title {
+      margin: 0;
+      color: var(--fg-strong);
+      font-size: 1.08rem;
+      font-weight: 600;
+    }
+    .excerpt {
+      margin: 10px 0 0;
+      white-space: pre-wrap;
+      font-size: 0.93rem;
+      max-height: 34vh;
+      overflow: auto;
+      padding-right: 2px;
+    }
+    .controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 10px 0 4px;
+    }
+    button {
+      appearance: none;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--fg);
+      padding: 8px 12px;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+    button:hover { border-color: #9ca3af; }
+    button:disabled { opacity: 0.55; cursor: not-allowed; }
+    .small {
+      font-size: 0.78rem;
+      color: #6b7280;
+      margin: 8px 0 0;
+    }
+    a { color: #4b5563; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>おはなしの時間</h1>
+    <p class="lead">地層を押すと、青空文庫からひとつお話を選んで読み上げます。</p>
+    <p class="hint">上の層ほど新しめ、下の層ほど古め。クリック位置の <code>(x,y)</code> で年代帯を調整します。</p>
+
+    <div id="strata" class="strata" aria-label="地層アスキーアート">
+      <pre id="strataAscii"></pre>
+    </div>
+
+    <section class="panel">
+      <p id="meta" class="meta">待機中</p>
+      <h2 id="workTitle" class="title">地層を押して、おはなしをはじめる</h2>
+      <div class="controls">
+        <button id="readBtn" disabled>朗読する</button>
+        <button id="stopBtn" disabled>停止</button>
+      </div>
+      <p id="excerpt" class="excerpt">ここに本文（先頭）が表示されます。</p>
+      <p id="sourceInfo" class="small"></p>
+    </section>
+  </main>
+
+  <script>
+    const ZORAPI_URL = "https://api.bungomail.com/v0/books?limit=50";
+    const JINA_PROXY_PREFIX = "https://r.jina.ai/http://";
+    const MAX_READ_CHARS = 2200;
+    const FALLBACK_BOOKS = [
+      { title: "走れメロス", author: "太宰治", year: 1940, text: "メロスは激怒した。必ず、かの邪智暴虐の王を除かなければならぬと決意した。" },
+      { title: "蜘蛛の糸", author: "芥川竜之介", year: 1918, text: "ある日の事でございます。御釈迦様は極楽の蓮池のふちを、ひとりでぶらぶらお歩きになっていらっしゃいました。" },
+      { title: "注文の多い料理店", author: "宮沢賢治", year: 1924, text: "二人の若い紳士が、すっかりイギリスの兵隊の形をして、ぴかぴかする鉄砲をかついで、白熊のような犬を二疋つれて、だいぶ山奥の、木の葉のかさかさしたとこ、こんなことを云いながら、あるいておりました。" },
+      { title: "坊っちゃん", author: "夏目漱石", year: 1906, text: "親譲りの無鉄砲で子供の時から損ばかりしている。" },
+      { title: "檸檬", author: "梶井基次郎", year: 1925, text: "えたいの知れない不吉な塊が私の心を始終圧えつけていた。" },
+      { title: "舞姫", author: "森鴎外", year: 1890, text: "石炭をば早や積み果てつ。中等室の卓のほとりはいと静にて、熾熱燈の光の晴れがましきも徒なり。" },
+      { title: "学問のすゝめ", author: "福沢諭吉", year: 1872, text: "天は人の上に人を造らず、人の下に人を造らずと言へり。" },
+      { title: "方丈記", author: "鴨長明", year: 1212, text: "ゆく河の流れは絶えずして、しかももとの水にあらず。" },
+      { title: "徒然草", author: "兼好法師", year: 1330, text: "つれづれなるままに、日ぐらし硯にむかひて、心にうつりゆくよしなしごとを、そこはかとなく書きつくれば、あやしうこそものぐるほしけれ。" }
+    ];
+
+    const strataEl = document.getElementById("strata");
+    const strataAsciiEl = document.getElementById("strataAscii");
+    const metaEl = document.getElementById("meta");
+    const titleEl = document.getElementById("workTitle");
+    const excerptEl = document.getElementById("excerpt");
+    const sourceInfoEl = document.getElementById("sourceInfo");
+    const readBtn = document.getElementById("readBtn");
+    const stopBtn = document.getElementById("stopBtn");
+
+    let catalogCache = null;
+    let currentWork = null;
+    let currentText = "";
+    let isLoading = false;
+
+    function buildAscii() {
+      const rows = 38;
+      const cols = 56;
+      const layers = ["·", "=", "~", "-", "_", "#", "%", "@"];
+      const lines = [];
+      for (let y = 0; y < rows; y++) {
+        const t = y / (rows - 1);
+        const wave = Math.sin(y * 0.45) * 1.8 + Math.sin(y * 0.16 + 1.7);
+        const idx = Math.min(layers.length - 1, Math.floor((t * layers.length) + ((wave + 2) / 8)));
+        const ch = layers[idx];
+        lines.push(ch.repeat(cols));
+      }
+      lines[0] = "┌" + "─".repeat(cols - 2) + "┐";
+      lines[rows - 1] = "└" + "─".repeat(cols - 2) + "┘";
+      for (let i = 1; i < rows - 1; i++) {
+        lines[i] = "│" + lines[i].slice(1, cols - 1) + "│";
+      }
+      strataAsciiEl.textContent = lines.join("\n");
+    }
+
+    function normalizeYear(book) {
+      const y1 = String(book["底本初版発行年1"] || "").match(/\d{4}/);
+      if (y1) return Number(y1[0]);
+      const y2 = String(book["公開日"] || "").match(/\d{4}/);
+      if (y2) return Number(y2[0]);
+      const born = String(book["生年月日"] || "").match(/\d{4}/);
+      if (born) return Number(born[0]) + 30;
+      return null;
+    }
+
+    async function fetchCatalog() {
+      try {
+        const res = await fetch(ZORAPI_URL, { cache: "no-store" });
+        if (!res.ok) throw new Error("book api unavailable");
+        const json = await res.json();
+        const books = (json.books || [])
+          .map((b) => {
+            const year = normalizeYear(b);
+            return {
+              title: b["作品名"] || "無題",
+              author: b["姓名"] || "作者不明",
+              year: year,
+              htmlUrl: b["XHTML/HTMLファイルURL"] || "",
+              opening: b["書き出し"] || ""
+            };
+          })
+          .filter((b) => !!b.title);
+        if (!books.length) throw new Error("empty catalog");
+        return { books, source: "zorapi" };
+      } catch {
+        return { books: FALLBACK_BOOKS, source: "fallback" };
+      }
+    }
+
+    async function getCatalog() {
+      if (catalogCache) return catalogCache;
+      catalogCache = await fetchCatalog();
+      return catalogCache;
+    }
+
+    function pickByDepth(books, depth) {
+      const withYear = books.filter((b) => Number.isFinite(b.year));
+      const pool = withYear.length ? withYear : books.map((b) => ({ ...b, year: 1900 }));
+      const sorted = [...pool].sort((a, b) => a.year - b.year);
+
+      // 分布の偏り補正: 座標を「年」ではなく分位点にマップ
+      const q = 1 - Math.pow(depth, 1.75); // top -> newer, bottom -> older
+      const center = Math.max(0, Math.min(sorted.length - 1, Math.round(q * (sorted.length - 1))));
+      const span = Math.max(6, Math.floor(sorted.length * 0.12));
+      const lo = Math.max(0, center - span);
+      const hi = Math.min(sorted.length - 1, center + span);
+      const window = sorted.slice(lo, hi + 1);
+      return window[Math.floor(Math.random() * window.length)];
+    }
+
+    async function fetchReadableText(book) {
+      if (!book.htmlUrl) {
+        return book.opening || "本文を取得できませんでした。";
+      }
+      const url = book.htmlUrl.replace(/^https?:\/\//, "");
+      const proxyUrl = JINA_PROXY_PREFIX + url;
+      try {
+        const res = await fetch(proxyUrl, { cache: "no-store" });
+        if (!res.ok) throw new Error("proxy failed");
+        const raw = await res.text();
+        const body = raw
+          .replace(/^Title:.*$/m, "")
+          .replace(/^URL Source:.*$/m, "")
+          .replace(/^Markdown Content:/m, "")
+          .replace(/\n{3,}/g, "\n\n")
+          .trim();
+        return body || book.opening || "本文を取得できませんでした。";
+      } catch {
+        return book.opening || "本文取得に失敗しました。";
+      }
+    }
+
+    function stopReading() {
+      speechSynthesis.cancel();
+      stopBtn.disabled = true;
+      readBtn.disabled = !currentText;
+    }
+
+    function startReading() {
+      if (!currentText) return;
+      stopReading();
+      const utter = new SpeechSynthesisUtterance(currentText.slice(0, MAX_READ_CHARS));
+      utter.lang = "ja-JP";
+      utter.rate = 0.95;
+      utter.pitch = 1.0;
+      const jaVoice = speechSynthesis.getVoices().find((v) => /ja[-_]?JP/i.test(v.lang));
+      if (jaVoice) utter.voice = jaVoice;
+      utter.onend = () => {
+        stopBtn.disabled = true;
+        readBtn.disabled = false;
+      };
+      speechSynthesis.speak(utter);
+      stopBtn.disabled = false;
+      readBtn.disabled = false;
+    }
+
+    async function chooseStory(clientX, clientY) {
+      if (isLoading) return;
+      isLoading = true;
+      readBtn.disabled = true;
+      stopBtn.disabled = true;
+      stopReading();
+
+      const rect = strataEl.getBoundingClientRect();
+      const x = Math.max(0, Math.min(rect.width, clientX - rect.left));
+      const y = Math.max(0, Math.min(rect.height, clientY - rect.top));
+      const depth = y / rect.height;
+
+      metaEl.textContent = `座標: x=${Math.round(x)}, y=${Math.round(y)} / depth=${depth.toFixed(2)} 読み込み中...`;
+
+      const { books, source } = await getCatalog();
+      const picked = pickByDepth(books, depth);
+      const text = await fetchReadableText(picked);
+
+      currentWork = picked;
+      currentText = text;
+      titleEl.textContent = `${picked.title} — ${picked.author}`;
+      excerptEl.textContent = text.slice(0, 4000);
+      metaEl.textContent = `推定年代: ${picked.year || "不明"}年ごろ / depth=${depth.toFixed(2)} / (${Math.round(x)}, ${Math.round(y)})`;
+      sourceInfoEl.innerHTML =
+        source === "zorapi"
+          ? `作品データ: ZORAPI。本文取得: <a href="https://r.jina.ai/" target="_blank" rel="noreferrer">r.jina.ai</a> 経由。`
+          : "作品データ: フォールバック内蔵リスト（API障害時モード）。";
+
+      readBtn.disabled = false;
+      isLoading = false;
+    }
+
+    strataEl.addEventListener("click", (e) => chooseStory(e.clientX, e.clientY));
+    strataEl.addEventListener("touchstart", (e) => {
+      const t = e.touches && e.touches[0];
+      if (t) chooseStory(t.clientX, t.clientY);
+    }, { passive: true });
+
+    readBtn.addEventListener("click", startReading);
+    stopBtn.addEventListener("click", stopReading);
+
+    buildAscii();
+    speechSynthesis.onvoiceschanged = () => {};
+  </script>
+</body>
+</html>

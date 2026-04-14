@@ -66,6 +66,18 @@
       </ul>
     </section>
 
+    <section class="mb-12 border-b border-gray-200 pb-10">
+      <h2 class="text-lg font-medium text-gray-700 mb-3">おはなしの時間（Web app）</h2>
+      <p class="leading-relaxed mb-4">
+        地層アスキーアートを押すと、青空文庫の作品をランダムで選んで音読する1ページアプリ。
+      </p>
+      <ul class="list-disc pl-5 space-y-2 text-sm leading-relaxed">
+        <li>URL: <a href="/kan-tools/ohanashi-no-jikan.html" class="underline hover:text-gray-700">/kan-tools/ohanashi-no-jikan.html</a></li>
+        <li>クリック座標の <code class="bg-gray-100 px-1 rounded">y</code> で年代帯を調整（上ほど新しめ、下ほど古め）</li>
+        <li>音声はブラウザ標準の <code class="bg-gray-100 px-1 rounded">SpeechSynthesis</code>（APIキー不要）</li>
+      </ul>
+    </section>
+
     <section>
       <h2 class="text-lg font-medium text-gray-700 mb-3">インストール</h2>
       <p class="text-sm leading-relaxed">
