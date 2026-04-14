@@ -6,12 +6,13 @@
 
     <h1 class="text-2xl font-semibold text-gray-700 mb-2">kan-tools</h1>
     <p class="text-l leading-relaxed mb-4">
-      個人用の CLI ツールメモ。今は以下の3つを並列管理。
+      個人用の CLI ツールメモ。今は以下の4つを並列管理。
     </p>
     <p class="text-sm leading-relaxed mb-10">
       <code class="bg-gray-100 px-1 rounded text-xs">~/Dropbox/kan-tools/kan-whisper</code><br>
       <code class="bg-gray-100 px-1 rounded text-xs">~/Dropbox/kan-tools/kan-srt2txt</code><br>
-      <code class="bg-gray-100 px-1 rounded text-xs">~/Dropbox/kan-tools/kan-tsv2srt</code>
+      <code class="bg-gray-100 px-1 rounded text-xs">~/Dropbox/kan-tools/kan-tsv2srt</code><br>
+      <code class="bg-gray-100 px-1 rounded text-xs">~/Dropbox/kan-tools/kan-wavfix</code>
     </p>
 
     <section class="mb-12 border-b border-gray-200 pb-10">
@@ -52,11 +53,24 @@
       </ul>
     </section>
 
+    <section class="mb-12 border-b border-gray-200 pb-10">
+      <h2 class="text-lg font-medium text-gray-700 mb-3">kan-wavfix</h2>
+      <p class="leading-relaxed mb-4">
+        破損した WAV を修復するツール。通常は wavfix バイナリ、必要に応じて full 修復（Python版）を利用。
+      </p>
+      <ul class="list-disc pl-5 space-y-2 text-sm leading-relaxed">
+        <li>コマンド: <code class="bg-gray-100 px-1 rounded">kan-wavfix</code></li>
+        <li>例（通常）: <code class="bg-gray-100 px-1 rounded text-xs">kan-wavfix path/to/broken.wav</code></li>
+        <li>例（full）: <code class="bg-gray-100 px-1 rounded text-xs">kan-wavfix path/to/broken.wav --full</code></li>
+        <li>内部で <code class="bg-gray-100 px-1 rounded text-xs">repair-wav.sh</code> と <code class="bg-gray-100 px-1 rounded text-xs">wavfix_full_data.py</code> を切り替え</li>
+      </ul>
+    </section>
+
     <section>
       <h2 class="text-lg font-medium text-gray-700 mb-3">インストール</h2>
       <p class="text-sm leading-relaxed">
         <code class="bg-gray-100 px-1 rounded">$HOME/.local/bin</code> にシンボリックリンクを作成して使う構成。
-        3コマンド（<code class="bg-gray-100 px-1 rounded">kan-whisper</code> / <code class="bg-gray-100 px-1 rounded">kan-srt2txt</code> / <code class="bg-gray-100 px-1 rounded">kan-tsv2srt</code>）を共通で利用。
+        4コマンド（<code class="bg-gray-100 px-1 rounded">kan-whisper</code> / <code class="bg-gray-100 px-1 rounded">kan-srt2txt</code> / <code class="bg-gray-100 px-1 rounded">kan-tsv2srt</code> / <code class="bg-gray-100 px-1 rounded">kan-wavfix</code>）を共通で利用。
       </p>
     </section>
   </div>
