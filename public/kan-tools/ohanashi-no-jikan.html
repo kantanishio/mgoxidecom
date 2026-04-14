@@ -134,6 +134,7 @@
 
   <script>
     const ZORAPI_URL = "https://api.bungomail.com/v0/books?limit=50";
+    const ZORAPI_BOOK_DETAIL = "https://api.bungomail.com/v0/books/";
     const MAX_READ_CHARS = 2200;
     const FALLBACK_BOOKS = [
       { title: "走れメロス", author: "太宰治", year: 1940, text: "メロスは激怒した。必ず、かの邪智暴虐の王を除かなければならぬと決意した。" },
@@ -146,6 +147,13 @@
       { title: "方丈記", author: "鴨長明", year: 1212, text: "ゆく河の流れは絶えずして、しかももとの水にあらず。" },
       { title: "徒然草", author: "兼好法師", year: 1330, text: "つれづれなるままに、日ぐらし硯にむかひて、心にうつりゆくよしなしごとを、そこはかとなく書きつくれば、あやしうこそものぐるほしけれ。" }
     ];
+    const LOCAL_OPENING_MAP = {
+      "坊っちゃん": "親譲りの無鉄砲で子供の時から損ばかりしている。",
+      "こころ": "私はその人を常に先生と呼んでいた。",
+      "吾輩は猫である": "吾輩は猫である。名前はまだ無い。",
+      "走れメロス": "メロスは激怒した。必ず、かの邪智暴虐の王を除かなければならぬと決意した。",
+      "檸檬": "えたいの知れない不吉な塊が私の心を始終圧えつけていた。"
+    };
 
     const strataEl = document.getElementById("strata");
     const strataAsciiEl = document.getElementById("strataAscii");
@@ -200,19 +208,29 @@
           .map((b) => {
             const year = normalizeYear(b);
             return {
+              id: b["作品ID"] || "",
               title: b["作品名"] || "無題",
               author: b["姓名"] || "作者不明",
               year: year,
               htmlUrl: b["XHTML/HTMLファイルURL"] || "",
               cardUrl: b["図書カードURL"] || "",
-              opening: b["書き出し"] || ""
+              opening: String(b["書き出し"] || "").trim()
             };
           })
           .filter((b) => !!b.title);
         if (!books.length) throw new Error("empty catalog");
         return { books, source: "zorapi" };
       } catch {
-        return { books: FALLBACK_BOOKS, source: "fallback" };
+        const books = FALLBACK_BOOKS.map((b, i) => ({
+          id: `local-${i + 1}`,
+          title: b.title,
+          author: b.author,
+          year: b.year,
+          htmlUrl: "",
+          cardUrl: "",
+          opening: String(b.text || "").trim()
+        }));
+        return { books, source: "fallback" };
       }
     }
 
@@ -267,6 +285,22 @@
       // ブラウザCORS制約で本文の直接取得が不安定なため、APIの書き出しを確実に利用する。
       if (book.opening && book.opening.length > 15) {
         return book.opening;
+      }
+      if (book.text && String(book.text).trim().length > 15) {
+        return String(book.text).trim();
+      }
+      if (book.id) {
+        try {
+          const res = await fetch(ZORAPI_BOOK_DETAIL + encodeURIComponent(book.id), { cache: "no-store" });
+          if (res.ok) {
+            const json = await res.json();
+            const opening = String(json?.book?.["書き出し"] || "").trim();
+            if (opening.length > 15) return opening;
+          }
+        } catch {}
+      }
+      if (LOCAL_OPENING_MAP[book.title]) {
+        return LOCAL_OPENING_MAP[book.title];
       }
       return `「${book.title}」の冒頭テキストを取得できませんでした。図書カードでご確認ください。`;
     }
